@@ -1,0 +1,20 @@
+#=======================================================
+# Visual Studio Build Outputs & Temp Files
+#=======================================================
+# Ignores any 'x64', 'Debug', or 'Release' folders anywhere in the tree
+[Xx]64/
+[Dd]ebug/
+[Rr]elease/
+
+# Ignore the hidden local Visual Studio cache folder
+.vs/
+
+# Ignore user-specific project settings
+*.vcxproj.user
+
+#=======================================================
+# Linux Build Outputs
+#=======================================================
+# If your build.sh outputs a binary named 'main' without an extension
+main
+
