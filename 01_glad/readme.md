@@ -129,6 +129,7 @@ We don't need the build folder anymore (you can generate it at any time later...
 $ pwd
 ~/prj/opengl/01_glad
 $ rm -rf ./build
+```
 
 ## A little more restructure
 
