@@ -73,4 +73,4 @@ $ chmod u+x build_c.sh
 $ ./build.sh && ./main
 ```
 
-If all goes well, you should see hello world.  Move on to the next test [02_glad](../02_glad/readme.md)
+If all goes well, you should see hello world.  Move on to the next test [01_glad](../01_glad/readme.md)
