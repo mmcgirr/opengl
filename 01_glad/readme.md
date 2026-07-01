@@ -66,7 +66,7 @@ $ mkdir ../inc ../lib
 
 This is the folder structure before the move
 ```pre
-.├── 00_glfw
+├── 00_glfw
 │   ├── build_c.sh
 │   ├── main.c
 │   └── readme.md
@@ -92,7 +92,7 @@ Let's copy all the stuff in build/include into inc, and let's copy src/gl.c into
 ```bash
 $ pwd
 ~/prj/opengl/01_glad
-$ mv -R ./build/include/* ../inc/
+$ mv ./build/include/* ../inc/
 $ mv ./build/src/gl.c ./
 ```
 
