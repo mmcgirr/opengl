@@ -1,0 +1,14 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/docs/">
+    <File Path="docs/adding_to_ms_soln.txt" />
+    <File Path="docs/glspec33.core.pdf" />
+    <File Path="docs/glspec46.core.pdf" />
+  </Folder>
+  <Project Path="00_glfw/00_glfw.vcxproj" Id="29114747-d83c-4496-aaec-2583a19b571e" />
+  <Project Path="01_glad/01_glad.vcxproj" Id="0a757bca-0e92-4c21-b81f-46dc91562203" />
+  <Project Path="02_glfw-window/02_glfw-window.vcxproj" Id="bd60f1eb-78de-429d-989c-7adc6df033df" />
+</Solution>
