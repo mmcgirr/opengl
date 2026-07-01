@@ -1,0 +1,97 @@
+Now that your shared property sheet is fully established, adding future standalone folders like 03_triangle takes under a minute.
+
+## 📁 1. Create the New Folder and Code File
+First, set up your standard source directory exactly like you did on Linux:
+
+   1. Create your new physical folder (03_triangle) inside your root opengl/ directory.
+   2. Drop your main.c and gl.c source files into it.
+
+------------------------------
+## ➕ 2. Add the Project to Your Solution
+
+   1. Open your master opengl.sln inside Visual Studio.
+   2. In the Solution Explorer, right-click the top-level Solution 'opengl' item.
+   3. Select Add > New Project...
+   4. Choose Empty C++ Project (Windows Desktop).
+   5. Use the Temporary Suffix Trick to avoid naming conflicts:
+   * Project Name: 03_triangle_temp
+      * Location: C:\Users\michaelmc\git\opengl\
+   6. Click Create.
+   7. In the Solution Explorer, right-click 03_triangle_temp, select Rename, and change it to its final clean name: 03_triangle.
+
+------------------------------
+## 🔗 3. Link Your Source Code
+
+   1. In the Solution Explorer, expand your new 03_triangle project tree.
+   2. Right-click the Source Files virtual folder filter.
+   3. Select Add > Existing Item...
+   4. Browse into your physical 03_triangle/ folder, select both main.c and gl.c, and click Add.
+
+------------------------------
+## ⚙️ 4. Apply the Shared Property Sheet (The Magic Step)
+Instead of typing out all your directories and .lib files again, you just link your existing sheet:
+
+   1. Open the Property Manager panel (View > Other Windows > Property Manager).
+   2. Expand the 03_triangle project tree.
+   3. Select all configuration folders (Debug | x64, Release | x64, etc.) by holding Ctrl and clicking them.
+   4. Right-click the highlighted folders and choose Add Existing Property Sheet...
+   5. Browse to your upper-level opengl/ root directory and select opengl_shared_settings.props.
+
+------------------------------
+## 🏃 5. Set Active and Run
+
+   1. Go back to your Solution Explorer.
+   2. Right-click your new 03_triangle project and choose Set as Startup Project.
+   3. Press F5 to compile and run your brand-new folder instance.
+
+Are you planning to add a lot of these individual folders, or are you ready to jump into writing the actual OpenGL pipeline code inside your new triangle project?
+
+
+
+=========================================
+
+That is an excellent approach. Taking the time to understand the differences between a Linux CLI workflow and an IDE like Visual Studio will make managing cross-platform code significantly easier.
+Since you are used to building via the CLI on Linux, thinking of Visual Studio’s components as direct equivalents to GCC/Make concepts can demystify how it manages your project.
+## 🗺️ Mapping Linux CLI to Visual Studio
+When you run your Linux script:
+gcc main.c gl.c -o main -I../inc ../lib/libglfw3.a -lGL -lm
+Here is exactly how Visual Studio maps those components:
+
+* Solution File (.sln) → The Parent Workspace
+This doesn't compile anything. It is a text file that simply groups individual projects together. Think of it as a master script or a top-level directory tracker.
+* Project File (.vcxproj) → A Makefile Target
+An individual project handles a single compilation goal (like an executable or a static library). Inside, it explicitly tracks which source files to feed to the compiler, functioning much like an individual target in a Makefile.
+* MSBuild (MSBuild.exe) → The Build Engine (make)
+When you press Ctrl + Shift + B, Visual Studio calls MSBuild. It reads the XML structure inside your .vcxproj file and passes the files, paths, and flags directly to the underlying compiler.
+* MSVC (cl.exe) → The Compiler (gcc / clang)
+This is the actual compiler. It takes your source files (main.c, gl.c) and compiles them into object files (.obj), just like gcc -c.
+* The Linker (link.exe) → The Linker Engine (ld)
+This takes your .obj files, evaluates your library paths (..\lib), links your static binaries (glfw3.lib, opengl32.lib), and outputs your final main.exe.
+
+------------------------------
+## 🧠 Core Concepts Every Linux Dev Needs in Visual Studio## 1. Filters vs. Physical Folders
+When you look at your Solution Explorer and see virtual folders labeled Source Files, Header Files, and Resource Files, these are called Filters.
+
+* They are completely fictional structures stored in the .vcxproj file just to keep the UI tidy.
+* Moving a file between these filters in Visual Studio does not move the file on your actual hard drive.
+
+## 2. The Build Configuration Matrix
+In Linux, if you want a debug build vs. a release build, you manually add or remove flags like -g or -O3 in your script.
+Visual Studio automates this via combinations of Configuration (Debug/Release) and Platform (x64/x86).
+
+* Changing the dropdown at the top of the screen completely swaps the flags that MSBuild passes to the compiler behind the scenes.
+* This is why we used a Property Sheet (.props)—it acts as a "global override" to guarantee your search paths stay identical no matter which mode you switch to.
+
+## 3. Intermediate and Output Directories
+When you build on Linux, your script outputs main right into your working folder. Visual Studio prefers to keep source folders pristine. By default, it generates a hidden x64/ or Debug/ folder inside your project directory to dump all temporary .obj artifacts and the final .exe.
+------------------------------
+## 🌐 For the Future: A Clean Open-Source Strategy
+Since your ultimate goal is educational and meant to be shared with others who might use different operating systems, you will eventually hit a tiny friction point: Windows developers will need your .sln/.vcxproj files, while Linux developers cannot use them.
+As your phases advance and you get comfortable with the fundamentals, consider wrapping the entire project in CMake.
+Instead of maintaining a Linux build.sh and a Windows Visual Studio Solution side-by-side, you write a single, plain-text CMakeLists.txt file in your root folder.
+
+* A Linux user can run cmake .. && make to generate a binary.
+* A Windows user can open the root folder directly in Visual Studio, and VS will natively parse the CMake file, auto-configure the menus, and let them hit F5 to run without needing a single .sln file.
+
+What specific phase or OpenGL concept are you planning to tackle next in your 03_triangle layout?
+
