@@ -1,7 +1,8 @@
 # OpenGL - educational repo
 
-## Structure
+## Starting Folder Structure
 
+```pre
 opengl
  \_ext
  | \_ glfw (submodule)
@@ -18,6 +19,7 @@ opengl
  |_ .gitmodules
  |_ .gitignore
  |_ README.md
+```
 
 Each project is self-contained.
 Each project should have a build_c.sh and a build_cpp.sh file
