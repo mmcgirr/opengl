@@ -6,7 +6,7 @@
 #define WIDTH 800
 #define HEIGHT 600
 
-static void error_callback(int errno, const char* description);
+static void error_callback(int error_code, const char* description);
 
 int main() {
 
@@ -50,6 +50,6 @@ int main() {
     return 0;
 }
 
-static void error_callback(int error, const char* description) {
+static void error_callback(int error_code, const char* description) {
     fprintf(stderr, "Error: %s\n", description);
 }
