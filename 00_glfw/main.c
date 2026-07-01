@@ -3,7 +3,9 @@
 #include <stdio.h>
 
 int main() {
-    
+
+    glfwInit();
+
     printf("Hello opengl\n");
     return 0;
 }
